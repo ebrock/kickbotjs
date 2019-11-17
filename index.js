@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const config = require('./config.json');
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -11,4 +12,4 @@ client.on("message", msg => {
     }
 });
 
-client.login("NDI5NDc1MzQ4OTA0ODA0MzUz.DaCOGg.vAPFav-JnkRPhNbgeJmAXeb3txk")
+client.login(config.test)
