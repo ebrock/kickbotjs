@@ -6,12 +6,4 @@ My second Discord bot, written in JavaScript this time around. I revisited my fi
 Coming soon.
 
 ## Roadmap
-[ ] Commands - 
-    [ ] Help
-    [ ] Slap
-    [ ] Push
-    [ ] Timeout
-[ ] Webhooks - 
-    [ ] Sports news via Twitter
-    [ ] GitHub repo updates :)
-[ ] Post latest Xbox DVR clips - time intensive. No known Microsoft APIs, this would be a project on its own. 
+Commands including Help, Slap, Push, Timeout, etc. Webhooks for Sports news via Twitter and GitHub repo updates. Post latest Xbox DVR clips - time intensive. No known Microsoft APIs, this would be a project on its own. 
