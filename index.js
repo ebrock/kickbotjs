@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const giphy = require('giphy-api')(config.giphy);
-const download = require('image-downloader');
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -31,29 +31,21 @@ client.on('message', (msg) => {
   const user = msg.mentions.users.first().username;
   console.log(`cmd: ${command}, user: ${user}`);
 
+  // Validate that name is name from server. 
+
   // If slap...
   if (command === 'slap') {
-    msg.channel.send(`**${msg.author.username}** slapped **${user}**`);
-    giphy.random('slap').then( (res) => {
-
-      // Set options for image-downloader.
-      let options = {
-        url: res.data.image_url,
-        dest: './temp.gif'
-      };
-
-      // Download image. I could send the URL which auto-populates in Discord, 
-      // but I think it is cleaner to only send the media. 
-      // However it is *very* slow. 
-      download.image(options)
-        .then(({ filename }) => {
-          console.log('Saved to', filename);
-          msg.channel.send({
-            files: ['./temp.gif']
-          })
-        })
-        .catch((err) => console.error(err))
-    });
+    giphy.random('slap').then((res) => {
+      console.log(res.data)
+      msg.channel.send(
+        `**${msg.author.username}** slapped **${user}**`, {
+        files: [res.data.images.downsized.url] //[res.data.image_url]
+      })
+      .then(console.log('ok'))
+      .catch(console.error);
+    })
+    .then(console.log)
+    .catch(console.error);
   }
 });
 
