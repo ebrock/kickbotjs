@@ -25,15 +25,20 @@ client.on('message', (msg) => {
   // If no prefix, ignore (return).
   if (msg.content.indexOf(config.prefix) !== 0) return;
 
-  // Parse message.
-  // const words = msg.content.slice(1);
+  // Try get mentioned user. 
+  let user = "";
+  try {
+    user = msg.mentions.users.first().username;
+  } catch(error) {
+    console.log(error);
+    return
+  }
+
+  // Parse command.
   const command = msg.content.slice(1).split(' ')[0].toLowerCase();
-  const user = msg.mentions.users.first().username;
   console.log(`cmd: ${command}, user: ${user}`);
 
-  // Validate that name is name from server. 
-
-  // If slap...
+  // If command is slap...
   if (command === 'slap') {
     giphy.search({
       q: 'slap',
@@ -46,8 +51,9 @@ client.on('message', (msg) => {
       msg.channel.send(`**${msg.author.username}** slapped **${user}**!`,{
         files: [result]
       })
-
     })
+  } else {
+    console.error("Command not found.");
   }
 });
 
