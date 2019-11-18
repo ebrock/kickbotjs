@@ -35,17 +35,19 @@ client.on('message', (msg) => {
 
   // If slap...
   if (command === 'slap') {
-    giphy.random('slap').then((res) => {
-      console.log(res.data)
-      msg.channel.send(
-        `**${msg.author.username}** slapped **${user}**`, {
-        files: [res.data.images.downsized.url] //[res.data.image_url]
+    giphy.search({
+      q: 'slap',
+      limit: 25
+    }, function (err, res) {
+      let rand = Math.floor(Math.random() * Math.floor(24)) + 1;
+      console.log(rand);
+      console.log(res.data[rand]);
+      let result = res.data[rand].images.downsized.url;
+      msg.channel.send(`**${msg.author.username}** slapped **${user}**!`,{
+        files: [result]
       })
-      .then(console.log('ok'))
-      .catch(console.error);
+
     })
-    .then(console.log)
-    .catch(console.error);
   }
 });
 
